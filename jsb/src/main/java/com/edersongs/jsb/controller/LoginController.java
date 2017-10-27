@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edersongs.jsb.repository.UsuarioRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class LoginController {
 
 	@Autowired private ObjectMapper mapper;
+	@Autowired private UsuarioRepository usuarioRepository;
 	
 	public ResponseEntity<?> realizarLogin() {
 		
