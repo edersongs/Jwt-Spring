@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.edersongs.jsb.model.Usuario;
 
@@ -22,5 +23,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	Optional<Usuario> findByLogin(String login);
 
 	@Query("select distinct per.nome from Usuario usr inner join usr.grupos grp inner join grp.permissoes per where usr.login = :login")
-	List<String> findByNameGrupoPermissao(String login);
+	List<String> findByNameGrupoPermissao(@Param("login") String login);
 }

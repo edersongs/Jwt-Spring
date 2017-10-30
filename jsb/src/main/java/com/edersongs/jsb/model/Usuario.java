@@ -4,12 +4,18 @@
 package com.edersongs.jsb.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author Éderson Gervásio
@@ -26,9 +32,17 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long codigo;
+	
 	private String nome;
+	
 	private String login;
+	
+	@JsonIgnore
 	private String senha;
+	
+	@ManyToMany
+	@JoinTable(name = "TUSUARIOGRUPO", joinColumns = @JoinColumn(name = "codusr"), inverseJoinColumns = @JoinColumn(name = "codgrp"))	
+	private List<Grupo> grupos;
 	
 	public Usuario() {}
 	
@@ -66,7 +80,13 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

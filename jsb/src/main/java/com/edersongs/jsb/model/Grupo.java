@@ -30,7 +30,9 @@ public class Grupo implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long codigo;
+	
 	private String nome;
+	
 	@ManyToMany
 	@JoinTable(name = "TGRUPOPERMISSAO", joinColumns = @JoinColumn(name = "codgrp"), inverseJoinColumns = @JoinColumn(name = "codper"))
 	private List<Permissao> permissoes;

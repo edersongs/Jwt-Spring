@@ -27,7 +27,7 @@ public class JsbApplication {
 	public CommandLineRunner iniciar(UsuarioRepository usuarioRepository) {
 		
 		return (args) -> {
-		
+			
 			usuarioRepository.save(new Usuario("Éderson Gervásio Silva", "edersongs", new BCryptPasswordEncoder().encode("root")));
 			usuarioRepository.save(new Usuario("Usuário de Teste", "usuariotst", new BCryptPasswordEncoder().encode("teste")));
 		};

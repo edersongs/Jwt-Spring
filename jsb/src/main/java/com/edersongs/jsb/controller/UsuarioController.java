@@ -3,13 +3,17 @@
  */
 package com.edersongs.jsb.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edersongs.jsb.model.Usuario;
 import com.edersongs.jsb.repository.UsuarioRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Éderson Gervásio
@@ -18,14 +22,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  */
 @RestController
-@RequestMapping("/api")
-public class LoginController {
+@RequestMapping("/usuarios")
+public class UsuarioController {
 
-	@Autowired private ObjectMapper mapper;
 	@Autowired private UsuarioRepository usuarioRepository;
 	
-	public ResponseEntity<?> realizarLogin() {
+	@GetMapping
+	public ResponseEntity<?> listarUsuarios() {
 		
-		return null;
+		return new ResponseEntity<List<Usuario>>(usuarioRepository.findAll(), HttpStatus.OK);
 	}
 }
