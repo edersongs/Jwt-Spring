@@ -46,7 +46,7 @@ public class Usuario implements Serializable {
 	
 	public Usuario() {}
 	
-	public Usuario(String nome, String login, String senha) {
+	public Usuario(String nome, String login, String senha, List<Grupo> grupos) {
 		
 		this.nome = nome;
 		this.login = login;
