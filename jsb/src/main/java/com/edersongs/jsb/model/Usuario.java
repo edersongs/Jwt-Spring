@@ -51,6 +51,7 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
+		this.grupos = grupos;
 	}
 	
 	public Long getCodigo() {

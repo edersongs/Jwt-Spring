@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.edersongs.jsb.model.Usuario;
 
@@ -18,6 +19,7 @@ import com.edersongs.jsb.model.Usuario;
 		   github.com/edersongs	
  *
  */
+@Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	Optional<Usuario> findByLogin(String login);
