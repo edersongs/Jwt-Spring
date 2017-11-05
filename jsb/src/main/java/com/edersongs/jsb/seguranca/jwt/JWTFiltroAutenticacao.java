@@ -24,12 +24,14 @@ import org.springframework.web.filter.GenericFilterBean;
 public class JWTFiltroAutenticacao extends GenericFilterBean {
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filter) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filter) 
+			throws IOException, ServletException {
 		
 		Authentication authentication = JWTServicoAutenticacaoToken
 											.validarTokenAutenticacao((HttpServletRequest) request);
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
 		filter.doFilter(request, response);
 	}
 }

@@ -29,8 +29,11 @@ public class JsbApplication {
 		
 		return (args) -> {
 			
-			usuarioRepository.save(new Usuario("Éderson Gervásio Silva", "edersongs", new BCryptPasswordEncoder().encode("root"), grupoRepository.findByNome("ADMINISTRADOR")));
-			usuarioRepository.save(new Usuario("Usuário de Teste", "usuariotst", new BCryptPasswordEncoder().encode("teste"), grupoRepository.findByNome("DESENVOLVEDOR")));
+			usuarioRepository.save(new Usuario("Éderson Gervásio Silva", "edersongs", 
+					new BCryptPasswordEncoder().encode("root"), grupoRepository.findByNome("ADMINISTRADOR")));
+			
+			usuarioRepository.save(new Usuario("Usuário de Teste", "usuariotst", 
+					new BCryptPasswordEncoder().encode("teste"), grupoRepository.findByNome("DESENVOLVEDOR")));
 		};
 	}
 }

@@ -3,6 +3,7 @@
  */
 package com.edersongs.jsb.seguranca.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -31,6 +32,9 @@ import com.edersongs.jsb.seguranca.jwt.JWTFiltroLogin;
 @EnableWebSecurity
 public class ConfiguracaoSegurancaWeb extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+	
 	@Bean
 	public UsuarioDetalheService userDetailsService() {
 		
@@ -54,10 +58,13 @@ public class ConfiguracaoSegurancaWeb extends WebSecurityConfigurerAdapter {
 		
 		http
 			.csrf().disable()
+			.exceptionHandling()
+			.authenticationEntryPoint(restAuthenticationEntryPoint)
+			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/login").permitAll()
+			//.antMatchers(HttpMethod.POST, "/login").permitAll()
 			.anyRequest().authenticated()
 		.and()
 			.addFilterBefore(new JWTFiltroLogin("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)

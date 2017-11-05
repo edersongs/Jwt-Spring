@@ -20,7 +20,7 @@ public class JsbApplicationTests {
 	@Test
 	public void contextLoads() {
 		
-	  System.out.println("Tamanho---------------" + grupoRepository.findByNome("ADMINISTRADOR").size());
+	  System.out.println("Tamanho---------------" + grupoRepository.findByNome("ROLE_ADMINISTRADOR").size());
 	}
 
 }

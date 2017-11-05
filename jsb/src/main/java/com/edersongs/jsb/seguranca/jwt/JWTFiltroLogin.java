@@ -18,6 +18,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.edersongs.jsb.seguranca.UsuarioAutentica;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -35,7 +36,8 @@ public class JWTFiltroLogin extends AbstractAuthenticationProcessingFilter {
 	}
 
 	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) 
+			throws AuthenticationException, IOException, ServletException {
 		
 		JWTCredenciais credenciais = new ObjectMapper()
 											.readValue(request.getInputStream(), JWTCredenciais.class);
@@ -50,9 +52,13 @@ public class JWTFiltroLogin extends AbstractAuthenticationProcessingFilter {
 	}
 	
 	@Override
-	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+	protected void successfulAuthentication(HttpServletRequest request, 
+			HttpServletResponse response, 
+			FilterChain chain, 
+			Authentication authResult) throws IOException, ServletException {
 		
-		JWTServicoAutenticacaoToken
-			.gerarTokenAutenticacao(response, authResult.getName());
+		UsuarioAutentica usuario = (UsuarioAutentica) authResult.getPrincipal();
+		
+		JWTServicoAutenticacaoToken.gerarTokenAutenticacao(response, usuario);
 	}
 }
